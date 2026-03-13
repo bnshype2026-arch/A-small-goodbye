@@ -36,8 +36,8 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
         <>
             <div style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-                gap: "1.5rem",
+                gridTemplateColumns: "repeat(auto-fill, minmax(clamp(120px, 45vw, 200px), 1fr))",
+                gap: "clamp(0.75rem, 3vw, 1.5rem)",
                 padding: "1rem"
             }}>
                 {photos.map((photo, index) => (

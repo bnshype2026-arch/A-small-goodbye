@@ -18,8 +18,8 @@ export default function EnvelopeScene({ isZoomed, onClick }: EnvelopeSceneProps)
             transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
             style={{
                 position: "relative",
-                width: "320px",
-                height: "210px",
+                width: "min(320px, 90vw)",
+                aspectRatio: "320/210",
                 cursor: onClick ? "pointer" : "default",
                 perspective: "1200px",
                 zIndex: 10,

@@ -47,132 +47,139 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: "90%",
-                maxWidth: "400px",
-                backgroundColor: "var(--color-warm-white)",
-                padding: "2.5rem 2rem",
-                borderRadius: "var(--border-radius-soft)",
-                boxShadow: "0 20px 40px var(--color-shadow-warm), 0 1px 3px rgba(0,0,0,0.05)",
+                position: "fixed",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 zIndex: 20,
+                padding: "1rem", // outer padding for very small screens
+                pointerEvents: "none"
+            }}
+        >
+            <div style={{
+                width: "min(400px, 100%)",
+                backgroundColor: "var(--color-warm-white)",
+                padding: "clamp(1.5rem, 6vw, 2.5rem)",
+                borderRadius: "var(--border-radius-soft)",
+                boxShadow: "0 20px 60px var(--color-shadow-warm), 0 2px 10px rgba(0,0,0,0.1)",
+                position: "relative",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-            }}
-        >
-            {/* Texture for the panel */}
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    opacity: 0.05,
-                    pointerEvents: "none",
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                    borderRadius: "inherit",
-                    mixBlendMode: "multiply",
-                }}
-            />
-
-            {/* Decorative Border */}
-            <div
-                style={{
-                    position: "absolute",
-                    inset: "12px",
-                    border: "1px solid var(--color-gold-muted)",
-                    opacity: 0.4,
-                    pointerEvents: "none",
-                    borderRadius: "8px",
-                }}
-            />
-
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "1.5rem", color: "var(--color-text-main)", marginBottom: "2rem", textAlign: "center", position: "relative" }}>
-                Enter your Letter Code
-            </h2>
-
-            <form onSubmit={handleSubmit} style={{ width: "100%", position: "relative" }}>
-                <input
-                    type="text"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    placeholder="[ Enter Code ]"
+                pointerEvents: "auto"
+            }}>
+                {/* Texture for the panel */}
+                <div
                     style={{
-                        width: "100%",
-                        padding: "1rem",
-                        fontSize: "1rem",
-                        textAlign: "center",
-                        backgroundColor: "rgba(255,255,255,0.5)",
-                        border: "1px solid rgba(191, 165, 101, 0.3)",
-                        borderRadius: "6px",
-                        color: "var(--color-text-main)",
-                        marginBottom: "1rem",
-                        transition: "all 0.3s ease",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
+                        position: "absolute",
+                        inset: 0,
+                        opacity: 0.05,
+                        pointerEvents: "none",
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        borderRadius: "inherit",
+                        mixBlendMode: "multiply",
                     }}
-                    onFocus={(e) => (e.target.style.borderColor = "var(--color-gold-muted)", e.target.style.backgroundColor = "rgba(255,255,255,0.8)")}
-                    onBlur={(e) => (e.target.style.borderColor = "rgba(191, 165, 101, 0.3)", e.target.style.backgroundColor = "rgba(255,255,255,0.5)")}
-                    disabled={loading}
                 />
 
-                <div style={{ minHeight: "24px", marginBottom: "1.5rem", textAlign: "center" }}>
-                    <AnimatePresence>
-                        {error && (
-                            <motion.p
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0 }}
-                                style={{ color: "#8B0000", fontSize: "0.85rem", margin: 0 }}
-                            >
-                                {error}
-                            </motion.p>
-                        )}
-                    </AnimatePresence>
-                </div>
+                {/* Decorative Border */}
+                <div
+                    style={{
+                        position: "absolute",
+                        inset: "12px",
+                        border: "1px solid var(--color-gold-muted)",
+                        opacity: 0.4,
+                        pointerEvents: "none",
+                        borderRadius: "8px",
+                    }}
+                />
+
+                <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "1.5rem", color: "var(--color-text-main)", marginBottom: "2rem", textAlign: "center", position: "relative" }}>
+                    Enter your Letter Code
+                </h2>
+
+                <form onSubmit={handleSubmit} style={{ width: "100%", position: "relative" }}>
+                    <input
+                        type="text"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                        placeholder="[ Enter Code ]"
+                        style={{
+                            width: "100%",
+                            padding: "1rem",
+                            fontSize: "1rem",
+                            textAlign: "center",
+                            backgroundColor: "rgba(255,255,255,0.5)",
+                            border: "1px solid rgba(191, 165, 101, 0.3)",
+                            borderRadius: "6px",
+                            color: "var(--color-text-main)",
+                            marginBottom: "1rem",
+                            transition: "all 0.3s ease",
+                            letterSpacing: "0.1em",
+                            textTransform: "uppercase",
+                        }}
+                        onFocus={(e) => (e.target.style.borderColor = "var(--color-gold-muted)", e.target.style.backgroundColor = "rgba(255,255,255,0.8)")}
+                        onBlur={(e) => (e.target.style.borderColor = "rgba(191, 165, 101, 0.3)", e.target.style.backgroundColor = "rgba(255,255,255,0.5)")}
+                        disabled={loading}
+                    />
+
+                    <div style={{ minHeight: "24px", marginBottom: "1.5rem", textAlign: "center" }}>
+                        <AnimatePresence>
+                            {error && (
+                                <motion.p
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0 }}
+                                    style={{ color: "#8B0000", fontSize: "0.85rem", margin: 0 }}
+                                >
+                                    {error}
+                                </motion.p>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    <button
+                        type="submit"
+                        disabled={loading || !code.trim()}
+                        style={{
+                            width: "100%",
+                            padding: "1rem",
+                            backgroundColor: "var(--color-text-main)",
+                            color: "var(--color-cream)",
+                            border: "none",
+                            borderRadius: "6px",
+                            fontSize: "1rem",
+                            fontWeight: 500,
+                            cursor: loading || !code.trim() ? "not-allowed" : "pointer",
+                            transition: "background-color 0.3s ease",
+                            opacity: loading || !code.trim() ? 0.7 : 1,
+                        }}
+                    >
+                        {loading ? "Opening..." : "Open the Letter"}
+                    </button>
+                </form>
 
                 <button
-                    type="submit"
-                    disabled={loading || !code.trim()}
+                    onClick={onCancel}
                     style={{
-                        width: "100%",
-                        padding: "1rem",
-                        backgroundColor: "var(--color-text-main)",
-                        color: "var(--color-cream)",
+                        marginTop: "1.5rem",
+                        background: "transparent",
                         border: "none",
-                        borderRadius: "6px",
-                        fontSize: "1rem",
-                        fontWeight: 500,
-                        cursor: loading || !code.trim() ? "not-allowed" : "pointer",
-                        transition: "background-color 0.3s ease",
-                        opacity: loading || !code.trim() ? 0.7 : 1,
+                        color: "var(--color-text-muted)",
+                        fontSize: "0.85rem",
+                        cursor: "pointer",
+                        position: "relative",
+                        zIndex: 2,
+                        textDecoration: "underline",
+                        textUnderlineOffset: "4px",
+                        transition: "color 0.3s ease",
                     }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-main)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-muted)")}
                 >
-                    {loading ? "Opening..." : "Open the Letter"}
+                    Cancel
                 </button>
-            </form>
-
-            <button
-                onClick={onCancel}
-                style={{
-                    marginTop: "1.5rem",
-                    background: "transparent",
-                    border: "none",
-                    color: "var(--color-text-muted)",
-                    fontSize: "0.85rem",
-                    cursor: "pointer",
-                    position: "relative",
-                    zIndex: 2,
-                    textDecoration: "underline",
-                    textUnderlineOffset: "4px",
-                    transition: "color 0.3s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-main)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-muted)")}
-            >
-                Cancel
-            </button>
+            </div>
         </motion.div>
     );
 }

@@ -116,7 +116,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1.5, delay: 0.5 }}
                             style={{
-                                padding: "4rem 3rem",
+                                padding: "clamp(2rem, 8vw, 4rem) clamp(1.5rem, 6vw, 3rem)",
                                 display: "flex",
                                 flexDirection: "column",
                                 flex: 1,
@@ -124,9 +124,9 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                         >
                             <h1 style={{
                                 fontFamily: "var(--font-serif)",
-                                fontSize: "2rem",
+                                fontSize: "clamp(1.5rem, 5vw, 2rem)",
                                 color: "var(--color-text-main)",
-                                marginBottom: "3rem"
+                                marginBottom: "2rem"
                             }}>
                                 Dear {letterData.recipient_name},
                             </h1>
@@ -134,11 +134,11 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                             <div
                                 style={{
                                     fontFamily: "var(--font-serif)",
-                                    fontSize: "1.2rem",
+                                    fontSize: "clamp(1rem, 4vw, 1.2rem)",
                                     lineHeight: 1.8,
                                     color: "var(--color-text-main)",
                                     whiteSpace: "pre-wrap",
-                                    marginBottom: "4rem"
+                                    marginBottom: "3rem"
                                 }}
                             >
                                 {letterData.letter_content}
