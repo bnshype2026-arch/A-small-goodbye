@@ -52,23 +52,31 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                zIndex: 20,
-                padding: "1rem", // outer padding for very small screens
-                pointerEvents: "none"
+                zIndex: 100, // Ensure it's above everything
+                padding: "20px",
+                backgroundColor: "rgba(0, 0, 0, 0.4)", // Darken the background
+                backdropFilter: "blur(8px)", // Blur for focus
+                WebkitBackdropFilter: "blur(8px)", // Safari support
             }}
         >
-            <div style={{
-                width: "min(400px, 100%)",
-                backgroundColor: "var(--color-warm-white)",
-                padding: "clamp(1.5rem, 6vw, 2.5rem)",
-                borderRadius: "var(--border-radius-soft)",
-                boxShadow: "0 20px 60px var(--color-shadow-warm), 0 2px 10px rgba(0,0,0,0.1)",
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                pointerEvents: "auto"
-            }}>
+            <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                style={{
+                    width: "100%",
+                    maxWidth: "400px",
+                    backgroundColor: "var(--color-warm-white)",
+                    padding: "clamp(2rem, 8vw, 3rem) 2rem",
+                    borderRadius: "var(--border-radius-soft)",
+                    boxShadow: "0 30px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1)",
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+            >
                 {/* Texture for the panel */}
                 <div
                     style={{
@@ -178,8 +186,8 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                     onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-muted)")}
                 >
                     Cancel
-                </button>
-            </div>
+            </motion.div>
         </motion.div>
+        </motion.div >
     );
 }
